@@ -4,34 +4,47 @@
 
 class Talent
 {
+protected:
+	std::string talent;
+	Talent(std::string inTalent) :talent(inTalent)
+	{
+
+	}
 public:
 
-	virtual std::string getTalent() = 0;
-
+	virtual std::string getTalent()=0;
 };
 class Swimming : virtual public Talent
 {
 public:
-
+	Swimming() :Talent("swim") 
+	{
+	}
 	virtual std::string getTalent()
 	{
-		return "swim";
+		return talent;
 	}
 };
 class Dancing : virtual public Talent
 {
 public:
+	Dancing() :Talent("dance")
+	{
+	}
 	virtual std::string getTalent()
 	{
-		return "dance";
+		return talent;
 	}
 };
-class Counting
+class Counting : virtual public Talent
 {
 public:
+	Counting() :Talent("counting")
+	{
+	}
 	virtual std::string getTalent()
 	{
-		return "counting";
+		return talent;
 	}
 };
 
@@ -39,8 +52,7 @@ class Dog
 {
 protected:
 	std::string name;
-
-	std::vector<std::string> talent;
+	std::vector<class Talent*> talent;
 public:
 	Dog(std::string inName) : name{ inName }
 	{
@@ -62,20 +74,18 @@ public:
 			{
 			case(1):
 			{
-				Swimming swim;
-				talent.push_back(swim.getTalent());
+				talent.push_back(new Swimming());
 				break;
 			}
 			case(2):
 			{
-				Dancing dance;
-				talent.push_back(dance.getTalent());
+	
+				talent.push_back( new Dancing());
 				break;
 			}
 			case(3):
 			{
-				Counting counting;
-				talent.push_back(counting.getTalent());
+				talent.push_back(new Counting());
 				break;
 			}
 			case(4):
@@ -96,7 +106,7 @@ public:
 		std::cout << "This is " << name << " and it has some talents :" << std::endl;
 		for (int i = 0; i < talent.size(); i++)
 		{
-			std::cout << "It can " << talent[i] << std::endl;
+			std::cout << "It can " << talent[i]->getTalent() << std::endl;
 		}
 
 	}
@@ -106,7 +116,7 @@ public:
 
 int main()
 {
-	Dog dog1("Steve");
+	Dog dog1("Smit");
 	dog1.setTalent();
 	dog1.show_talents();
 	return 0;
