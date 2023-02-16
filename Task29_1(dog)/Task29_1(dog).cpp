@@ -114,9 +114,9 @@ public:
 	{
 		for (int i = 0; i < talent.size(); i++)
 		{
-			delete talent[i];
+			delete[] talent[i];
 		}
-		
+		talent.clear();
 	}
 };
 
