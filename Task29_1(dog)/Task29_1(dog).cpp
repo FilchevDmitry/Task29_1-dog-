@@ -11,7 +11,7 @@ protected:
 
 	}
 public:
-
+	virtual ~Talent() = default;
 	virtual std::string getTalent()=0;
 };
 class Swimming : virtual public Talent
@@ -114,7 +114,7 @@ public:
 	{
 		for (int i = 0; i < talent.size(); i++)
 		{
-			delete[] talent[i];
+			delete talent[i];
 		}
 		talent.clear();
 	}
